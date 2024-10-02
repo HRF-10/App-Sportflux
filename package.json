@@ -84,6 +84,8 @@
       "cordova-plugin-screen-pinning": {},
       "cordova-plugin-inappbrowser": {}
     },
-    "platforms": []
+    "platforms": [
+      "android"
+    ]
   }
 }

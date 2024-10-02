@@ -1,0 +1,74 @@
+ion-content {
+    display: flex;
+    flex-direction: column;
+    --background: radial-gradient(
+        circle at 10% 20%,
+        rgb(210, 231, 242) 0%,
+        rgb(7, 134, 197) 90.1%
+    );
+}
+
+.chat-box {
+    flex: 1; /* Membuat chat-box tumbuh */
+    position: relative;
+    margin-top: 80px;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.message {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #007acc;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.message .text {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 85%;
+}
+
+.text {
+    font-size: 14px;
+    color: #000;
+    z-index: 20;
+}
+
+.input-box {
+    display: flex;
+    padding: 15px;
+    background-color: #007acc;
+    justify-content: space-between;
+    margin-top: 62vh;
+    border-radius: 40px 40px 0px 0px;
+}
+
+.input-box input {
+    background-color: #fff;
+    color: #000;
+    display: flex;        
+    padding: 5px;
+    border: none;
+    overflow: hidden;
+    width: 80%;
+    border-radius: 20px;
+}
+
+.input-box ion-icon {
+    padding: 10px;
+    color: white;
+    font-size: 30px;
+}

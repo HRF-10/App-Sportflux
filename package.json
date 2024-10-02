@@ -26,11 +26,13 @@
     "@capacitor/haptics": "6.0.1",
     "@capacitor/keyboard": "6.0.2",
     "@capacitor/status-bar": "6.0.1",
-    "@ionic/angular": "^8.0.0",
+    "@ionic-native/core": "^5.36.0",
+    "@ionic-native/in-app-browser": "^5.36.0",
+    "@ionic/angular": "^8.3.1",
     "@ionic/cordova-builders": "^12.1.2",
     "chart.js": "^4.4.4",
     "ionicons": "^7.0.0",
-    "rxjs": "~7.8.0",
+    "rxjs": "^7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
   },
@@ -49,10 +51,13 @@
     "@types/jasmine": "~5.1.0",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
+    "@typescript-eslint/utils": "^8.8.0",
     "cordova-android": "^13.0.0",
     "cordova-plugin-device": "^2.0.2",
+    "cordova-plugin-inappbrowser": "^6.0.0",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
     "cordova-plugin-ionic-webview": "^5.0.1",
+    "cordova-plugin-screen-pinner": "^1.0.9",
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-statusbar": "^2.4.2",
     "eslint": "^8.57.0",
@@ -75,10 +80,10 @@
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
-      "cordova-plugin-ionic-keyboard": {}
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-plugin-screen-pinning": {},
+      "cordova-plugin-inappbrowser": {}
     },
-    "platforms": [
-      "android"
-    ]
+    "platforms": []
   }
 }

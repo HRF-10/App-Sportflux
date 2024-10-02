@@ -24,11 +24,27 @@ const routes: Routes = [
       path: 'device',
       loadChildren: () => import('../device/device.module').then( m => m.DevicePageModule)
     },
+    {
+      path: 'record',
+      loadChildren: () => import('../record/record.module').then( m => m.RecordPageModule)
+    },
+    {
+      path: 'trainer',
+      loadChildren: () => import('../trainer/trainer.module').then( m => m.TrainerPageModule)
+    },
+    {
+      path: 'fisioterapis',
+      loadChildren: () => import('../fisioterapis/fisioterapis.module').then( m => m.FisioterapisPageModule)
+    },
+    {
+      path: 'message',
+      loadChildren: () => import('../message/message.module').then( m => m.MessagePageModule)
+    },
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/login',
+    redirectTo: '/login',
     pathMatch: 'full'
   }
 ];

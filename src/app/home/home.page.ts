@@ -1,5 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { Router } from '@angular/router'; // Import Router
+import { Router } from '@angular/router';
+
+declare const Chart: any;
 
 @Component({
   selector: 'app-home',
@@ -7,31 +9,33 @@ import { Router } from '@angular/router'; // Import Router
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements AfterViewInit {
-  
-  constructor(private router: Router) { } // Injeksi Router
+  private emgChart: any; // Simpan instance chart
+  private chartData: number[] = []; // Data amplitudo EMG
+  private timeLabels: number[] = []; // Label waktu dalam detik
+  private timeCounter: number = 0; // Mulai dari 0
+
+  constructor(private router: Router) { }
 
   ngAfterViewInit() {
     this.createChart();
   }
 
   createChart() {
-    // Data untuk chart
-    const data = {
-      labels: ['0', '100', '200', '300', '400', '500', '600', '700', '800', '900', '1000'], // Time in ms
+    const initialData = {
+      labels: this.timeLabels,
       datasets: [{
         label: 'EMG Amplitude (mV)',
-        data: [0.5, 1.2, 0.9, 1.5, 0.8, 1.1, 0.7, 1.4, 0.6, 1.0, 1.3], // Example data points
-        borderColor: 'rgba(255, 255, 255, 1)',  // Ubah garis menjadi putih
-        backgroundColor: 'rgba(255, 255, 255, 0.2)',  // Ubah background menjadi semi-transparan putih
+        data: this.chartData,
+        borderColor: 'rgba(255, 255, 255, 1)', // Garis putih
+        backgroundColor: 'rgba(255, 255, 255, 0.2)', // Latar belakang semi-transparan
         fill: true,
-        tension: 0.4, // Smooth curve
+        tension: 0.4, // Kurva halus
       }]
     };
 
-    // Konfigurasi chart
     const config = {
       type: 'line',
-      data: data,
+      data: initialData,
       options: {
         responsive: true,
         maintainAspectRatio: false,
@@ -39,53 +43,87 @@ export class HomePage implements AfterViewInit {
           x: {
             title: {
               display: true,
-              text: 'Time (ms)',
-              color: '#ffffff', // Ubah warna title sumbu X menjadi putih
+              text: 'Waktu (detik)', // Label untuk sumbu X
+              color: '#ffffff',
             },
             ticks: {
-              color: '#ffffff', // Ubah warna label sumbu X menjadi putih
+              color: '#ffffff',
             },
             grid: {
-              color: 'rgba(255, 255, 255, 0.2)', // Ubah warna gridline sumbu X
+              color: 'rgba(255, 255, 255, 0.2)',
             },
           },
           y: {
             title: {
               display: true,
-              text: 'EMG Amplitude (mV)',
-              color: '#ffffff', // Ubah warna title sumbu Y menjadi putih
+              text: 'EMG Amplitude (mV)', // Label untuk sumbu Y
+              color: '#ffffff',
             },
             ticks: {
-              color: '#ffffff', // Ubah warna label sumbu Y menjadi putih
+              color: '#ffffff',
             },
             grid: {
-              color: 'rgba(255, 255, 255, 0.2)', // Ubah warna gridline sumbu Y
+              color: 'rgba(255, 255, 255, 0.2)',
             },
             suggestedMin: 0,
-            suggestedMax: 2
+            suggestedMax: 2 // Sesuaikan batas maksimum
           }
         },
         plugins: {
           legend: {
             labels: {
-              color: '#ffffff' // Ubah warna label legenda menjadi putih
+              color: '#ffffff' // Warna label legenda
             }
           }
         }
       }
     };
 
-    // Inisialisasi chart setelah view siap
     const ctx = document.getElementById('emgChart') as HTMLCanvasElement;
     if (ctx) {
-      new (window as any).Chart(ctx.getContext('2d')!, config); // Menggunakan Chart.js dari CDN
+      this.emgChart = new (window as any).Chart(ctx.getContext('2d')!, config);
+      this.startDynamicUpdates(); // Mulai pembaruan dinamis
     } else {
       console.error('Canvas element not found');
     }
   }
 
-  navigateToDiagnose() {
-    // Arahkan ke halaman diagnose
-    this.router.navigate(['/diagnose']);
+  startDynamicUpdates() {
+    let time = 0; // Mengatur waktu mulai
+    setInterval(() => {
+      // Menghasilkan data EMG baru dengan variasi acak
+      const newAmplitude = Math.floor(Math.random() * 40) / 20; // Menghasilkan nilai antara 0 dan 2
+      this.chartData.push(newAmplitude); // Tambahkan data baru ke array
+      this.timeLabels.push(time); // Tambahkan label waktu baru
+
+      // Perbarui waktu
+      time++; // Tambah satu detik setiap interval
+
+      // Jika waktu lebih dari 59 detik (60 detik total), mulai ulang
+      if (time >= 60) {
+        time = 0; // Reset waktu
+        this.chartData = []; // Reset data amplitudo
+        this.timeLabels = []; // Reset label waktu
+      }
+
+      // Jika lebih dari 60 data, hapus data paling awal
+      if (this.chartData.length > 60) {
+        this.chartData.shift();
+        this.timeLabels.shift();
+      }
+
+      // Perbarui data chart
+      this.emgChart.data.labels = this.timeLabels;
+      this.emgChart.data.datasets[0].data = this.chartData;
+      this.emgChart.update(); // Perbarui grafik
+    }, 1000); // Pembaruan setiap 1000 ms (1 detik)
+  }
+
+  navigateToRecord() {
+    this.router.navigate(['/tabs/record']);
+  }
+
+  navigateToDevice() {
+    this.router.navigate(['/tabs/device']);
   }
 }

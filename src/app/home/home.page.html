@@ -17,7 +17,7 @@
       left: 0;
       width: 100vw;
       height: 300px;
-      border-radius: 50px;
+      border-radius: 0px 0px 50px 50px;
       z-index: 30;
       top: -50px;
       margin-top: 20px;
@@ -34,8 +34,8 @@
 
     <div
       style="
-        background: url(../../assets/img/master_file/SPORTFLUX-LOGO.png)
-          no-repeat center;
+        background: url(../../assets/master_file/SPORTFLUX-LOGO.png)
+        no-repeat center;
         height: 60px;
         width: 50%;
         transform: translate(-50%, -50%);
@@ -93,7 +93,7 @@
           color: white;
         "
       >
-        USER 1
+        user 1
       </p>
       <p
         style="
@@ -154,7 +154,7 @@
     </div>
   </div>
 
-  <ion-grid style="margin-top: 260px">
+  <ion-grid style="margin-top: 280px">
     <ion-row>
       <div
         [routerLink]=""
@@ -191,7 +191,7 @@
             background: rgba(0, 0, 0, 0.482);
             cursor: pointer; /* Tambahkan ini agar tampak seperti tombol */
           "
-          (click)="navigateToDiagnose()"
+          (click)="navigateToRecord()"
         >
           Live Record Channel 1 Device 1
         </div>
@@ -202,12 +202,14 @@
   <ion-row style="justify-content: center">
     <div
       style="
+      margin: 10px;
         overflow: scroll;
         box-shadow: 5px 5px 10px #0b0b0b;
         width: 100%;
         background: rgba(0, 0, 0, 0.418);
         border-radius: 30px;
         z-index: 30;
+        padding:20px;
       "
     >
       <ion-grid>
@@ -215,13 +217,17 @@
           [routerLink]=""
           style="
             font-weight: bold;
+            font-size: 20px;
             z-index: 120;
             width: 100%;
             height: 40px;
             padding: 10px 0;
             color: white;
             text-align: center;
+            margin-top: 10px;
+            margin-bottom: 20px;
           "
+          (click)="navigateToDevice()"
         >
           Connected SportFlux EMG
         </div>
@@ -306,7 +312,7 @@
         z-index: 30;
       "
     >
-      <ion-grid style="margin-bottom: 20px;">
+      <ion-grid style="margin-bottom: 20px; height: auto;">
         <ion-row>
           <ion-col size="4" class="ion-text-center">
             <div
@@ -317,9 +323,12 @@
                 padding: 10px;
               "
             >
-              <div style="font-size: 30px; margin-bottom: 5px">👥</div>
+              <div style="margin-bottom: 5px;">
+                <!-- Gambar PNG diatur ukurannya agar seukuran dengan ikon -->
+                <img src="../../assets/master_file/hub.png" style="width: 50px; height: 50px; object-fit: contain; filter: brightness(0) saturate(100%) invert(70%) sepia(70%) hue-rotate(188deg) brightness(94%) contrast(95%);">
+              </div>
               <!-- Replace with your icon -->
-              <div style="color: white">SportFlux Hub</div>
+              <div style="color: white;"><a href="/message" style="text-decoration: none; color: white;">SportFlux Hub</a></div>
             </div>
           </ion-col>
           <ion-col size="4" class="ion-text-center">
@@ -331,9 +340,12 @@
                 padding: 10px;
               "
             >
-              <div style="font-size: 30px; margin-bottom: 5px">💆‍♂</div>
+              <div style="margin-bottom: 5px;">
+                <!-- Gambar PNG diatur ukurannya agar seukuran dengan ikon -->
+                <img src="../../assets/master_file/fisio.png" style="width: 50px; height: 50px; object-fit: contain; filter: brightness(0) saturate(100%) invert(70%) sepia(70%) hue-rotate(188deg) brightness(94%) contrast(95%);">
+              </div>
               <!-- Replace with your icon -->
-              <div style="color: white">SportFlux Fisioterapis</div>
+              <div style="color: white"><a href="/tabs/fisioterapis" style="text-decoration: none; color: white;">SportFlux Fisioterapis</a></div>
             </div>
           </ion-col>
           <ion-col size="4" class="ion-text-center">
@@ -345,11 +357,15 @@
                 padding: 10px;
               "
             >
-              <div style="font-size: 30px; margin-bottom: 5px">🏅</div>
-              <!-- Replace with your icon -->
-              <div style="color: white">SportFlux Trainer</div>
+              <div style="margin-bottom: 5px;">
+                <!-- Gambar PNG diatur ukurannya agar seukuran dengan ikon -->
+                <img src="../../assets/master_file/trainer.png" style="width: 50px; height: 50px; object-fit: contain; filter: brightness(0) saturate(100%) invert(70%) sepia(70%) hue-rotate(188deg) brightness(94%) contrast(95%);">
+              </div>
+              <div style="color: white">
+                <a href="/tabs/trainer" style="text-decoration: none; color: white;">SportFlux Trainer</a>
+              </div>
             </div>
-          </ion-col>
+          </ion-col>          
         </ion-row>
       </ion-grid>
     </div>
